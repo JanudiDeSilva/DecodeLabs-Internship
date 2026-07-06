@@ -1,59 +1,22 @@
-# Project 2: Exploratory Data Analysis (EDA)
+## Project 2: Exploratory Data Analysis (EDA)
 
-## Objective
+### Overview
 
-The objective of this project was to analyze the dataset and identify patterns, trends, distributions, and outliers using Exploratory Data Analysis (EDA).
+This project explores the cleaned e-commerce dataset to uncover patterns, trends, and relationships before creating visualizations or dashboards. The analysis helps transform raw data into meaningful business insights.
 
-## Tasks Performed
+### Key Tasks
 
-1. Loaded the cleaned dataset.
-2. Examined dataset structure and data types.
-3. Generated descriptive statistics.
-4. Calculated mean and median values.
-5. Analyzed product popularity.
-6. Analyzed payment method distribution.
-7. Analyzed order status distribution.
-8. Analyzed referral source distribution.
-9. Detected outliers in the TotalPrice column using the IQR method.
+* Loaded and validated the cleaned dataset.
+* Generated descriptive statistics for key numeric variables, including **Quantity**, **Unit Price**, **Items in Cart**, and **Total Price**.
+* Analyzed categorical variables such as **Product**, **Payment Method**, **Order Status**, and **Referral Source**.
+* Identified outliers in **Total Price** using the Interquartile Range (IQR) method.
+* Examined correlations between numeric variables using a correlation matrix.
+* Visualized the distribution of order values with histograms and boxplots to better understand data spread and detect anomalies.
 
-## Key Findings
+### Result
 
-### Dataset Overview
+The analysis provided insights into customer purchasing behavior, payment preferences, referral sources, and order status distribution. It also identified a small number of outlier transactions and highlighted relationships between key numeric variables. The project generated visualizations including a correlation heatmap, histogram, and boxplot to support the findings.
 
-* Total Records: 1200
-* Total Columns: 14
+### Key Takeaway
 
-### Numerical Analysis
-
-* Average Quantity Ordered: 2.95
-* Average Unit Price: 356.41
-* Average Total Price: 1053.97
-* Median Total Price: 823.62
-
-### Product Analysis
-
-* Most purchased product: Printer (181 orders)
-* Second most purchased product: Tablet (179 orders)
-* Third most purchased product: Chair (178 orders)
-
-### Payment Method Analysis
-
-* Most common payment method: Online (258 transactions)
-
-### Order Status Analysis
-
-* Highest order status category: Cancelled (250 orders)
-* Delivered orders: 231
-
-### Referral Source Analysis
-
-* Top referral source: Instagram (259 referrals)
-* Second highest referral source: Email (250 referrals)
-
-### Outlier Analysis
-
-* Number of outliers detected in TotalPrice: 8
-
-## Conclusion
-
-The dataset contains balanced distributions across products, payment methods, and referral sources. Printer was the most frequently purchased product, while Online was the most commonly used payment method. A total of 8 outliers were identified in the TotalPrice column. The analysis provided useful insights into customer purchasing behavior and order trends.
+Exploratory Data Analysis is an essential step in understanding a dataset. By summarizing statistics, identifying patterns, detecting anomalies, and examining relationships, EDA provides the insights needed for informed decision-making and more effective data visualization.

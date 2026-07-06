@@ -1,37 +1,25 @@
-# Data Cleaning & Preparation
+## Project 1: Data Cleaning & Preparation
 
-## Task  Overview
+### Overview
 
-This Task focuses on cleaning and preparing a raw dataset using Python and Pandas.
+This project focuses on preparing a raw e-commerce dataset for analysis by cleaning, validating, and standardizing the data. The dataset contains **1,200 order records** across **14 columns**, providing a reliable foundation for subsequent analytics and visualization projects.
 
-## Tasks Performed
+### Key Tasks
 
-1. Loaded the dataset from an Excel file.
-2. Identified missing values in the dataset.
-3. Replaced missing values in the CouponCode column with "No Coupon".
-4. Checked for duplicate rows and removed them if present.
-5. Converted the Date column to datetime format.
-6. Checked for duplicate Order IDs.
-7. Validated the cleaned dataset.
-8. Exported the cleaned dataset to a new Excel file.
+* Loaded and inspected the raw dataset.
+* Handled missing values by replacing empty **CouponCode** entries with **"No Coupon"**.
+* Removed duplicate records and verified that every **OrderID** is unique.
+* Converted the **Date** column to datetime format.
+* Converted numeric columns to appropriate data types.
+* Standardized text fields by trimming whitespace and ensuring consistent formatting.
+* Removed invalid records with non-positive quantities or prices.
+* Recalculated **TotalPrice** (`Quantity × UnitPrice`) to ensure data consistency.
+* Performed validation checks to confirm data integrity before saving.
 
-## Results
+### Result
 
-* Initial Dataset Size: 1200 rows × 14 columns
-* Missing CouponCode Values Before Cleaning: 309
-* Missing CouponCode Values After Cleaning: 0
-* Duplicate Rows Found: 0
-* Duplicate Order IDs Found: 0
-* Final Dataset Size: 1200 rows × 14 columns
+The cleaned dataset retained all **1,200 records** and was saved as **Cleaned_Dataset.xlsx**, serving as the foundation for all subsequent projects.
 
-## Tools Used
+### Key Takeaway
 
-* Python
-* Pandas
-* NumPy
-
-## Output
-
-The cleaned dataset was saved as:
-
-Cleaned_Dataset.xlsx
+Data cleaning is a critical step in the analytics workflow. By handling missing values appropriately, validating records, and ensuring consistency across the dataset, the data becomes accurate, reliable, and ready for meaningful analysis.
