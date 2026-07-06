@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📊 Data Analytics Dashboard - Project4</title>
+    
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 24px;
+            color: #1a1a2e;
+        }
+
+        /* ---------- HEADER ---------- */
+        .dashboard-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 28px 36px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .dashboard-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .dashboard-header h1 span {
+            color: #fbbf24;
+        }
+
+        .dashboard-header .subtitle {
+            opacity: 0.75;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .header-badge {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-badge strong {
+            color: #fbbf24;
+        }
+
+        /* ---------- PROJECT INFO BAR ---------- */
+        .project-info {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 24px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border-left: 5px solid #4f46e5;
+        }
+
+        .project-info .path {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .project-info .path code {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        .project-info .stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .project-info .stats span {
+            background: #f8fafc;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ---------- NAVIGATION ---------- */
+        .nav-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-bar a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-bar a:hover {
+            background: #eef2ff;
+        }
+
+        .nav-bar .file-info {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* ---------- GRID ---------- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        /* ---------- CARDS ---------- */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px 22px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .card-header .tag {
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #eef2f6;
+            background: #fafbfc;
+            flex: 1;
+            object-fit: contain;
+            min-height: 180px;
+            max-height: 260px;
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .card-full img {
+            max-height: 320px;
+        }
+
+        /* ---------- INSIGHTS FOOTER ---------- */
+        .insights-footer {
+            margin-top: 30px;
+            background: white;
+            border-radius: 16px;
+            padding: 24px 30px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .insights-footer h3 {
+            font-size: 17px;
+            margin-bottom: 14px;
+        }
+
+        .insight-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .insight-chips .chip {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            border-left: 3px solid #4f46e5;
+        }
+
+        .insight-chips .chip strong {
+            color: #1e293b;
+        }
+
+        .insight-chips .chip .highlight {
+            color: #4f46e5;
+            font-weight: 700;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 700px) {
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .project-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card img {
+                min-height: 140px;
+                max-height: 200px;
+            }
+
+            .card-full img {
+                max-height: 240px;
+            }
+
+            .insight-chips .chip {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+        }
+
+        /* ---------- PRINT STYLES ---------- */
+        @media print {
+            body {
+                background: white;
+                padding: 12px;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            .card:hover {
+                transform: none;
+            }
+            .dashboard-header {
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .nav-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- HEADER -->
+    <!-- ============================================================ -->
+    <header class="dashboard-header">
+        <div>
+            <h1>📊 Data Analytics <span>Dashboard</span></h1>
+            <div class="subtitle">DecodeLabs Internship — Project4 · All Visualizations</div>
+        </div>
+        <div class="header-badge">
+            📁 <strong>9</strong> visualizations &nbsp;·&nbsp; 🗓️ 2023–2025
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- NAVIGATION BAR -->
+    <!-- ============================================================ -->
+    <div class="nav-bar">
+        <div>
+            <a href="../README.md">📄 Back to Main README</a>
+            <a href="README.md" style="margin-left: 12px;">📄 Project4 README</a>
+            <a href="task4.py" style="margin-left: 12px;">🐍 View Code</a>
+        </div>
+        <div class="file-info">
+            📂 <code>Project4/Project4_Charts/</code>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT INFO BAR -->
+    <!-- ============================================================ -->
+    <div class="project-info">
+        <div class="path">
+            📂 <code>Project4 / Project4_Charts /</code> &nbsp;← all charts stored here
+        </div>
+        <div class="stats">
+            <span>📊 9 Charts</span>
+            <span>📈 1,247 Orders</span>
+            <span>💰 $2.4M Revenue</span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- DASHBOARD GRID -->
+    <!-- ============================================================ -->
+    <div class="dashboard-grid">
+
+        <!-- 1. CORRELATION HEATMAP -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🔗 Correlation Heatmap</h3>
+                <span class="tag">Numeric</span>
+            </div>
+            <img src="Project4_Charts/correlation_heatmap.png" alt="Correlation Heatmap" loading="lazy" />
+        </div>
+
+        <!-- 2. MONTHLY ORDER TREND -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📈 Monthly Order Trend</h3>
+                <span class="tag">Time Series</span>
+            </div>
+            <img src="Project4_Charts/monthly_order_trend.png" alt="Monthly Order Trend" loading="lazy" />
+        </div>
+
+        <!-- 3. ORDER STATUS BREAKDOWN -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📦 Order Status Breakdown</h3>
+                <span class="tag">Distribution</span>
+            </div>
+            <img src="Project4_Charts/order_status_breakdown.png" alt="Order Status Breakdown" loading="lazy" />
+        </div>
+
+        <!-- 4. PAYMENT METHOD DISTRIBUTION -->
+        <div class="card">
+            <div class="card-header">
+                <h3>💳 Payment Methods</h3>
+                <span class="tag">% Share</span>
+            </div>
+            <img src="Project4_Charts/payment_method_distribution.png" alt="Payment Method Distribution" loading="lazy" />
+        </div>
+
+        <!-- 5. PRODUCTS BY ORDER COUNT -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🛒 Products by Orders</h3>
+                <span class="tag">Popularity</span>
+            </div>
+            <img src="Project4_Charts/products_by_order_count.png" alt="Products by Order Count" loading="lazy" />
+        </div>
+
+        <!-- 6. REFERRAL SOURCE DISTRIBUTION -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🔗 Referral Sources</h3>
+                <span class="tag">Traffic</span>
+            </div>
+            <img src="Project4_Charts/referral_source_distribution.png" alt="Referral Source Distribution" loading="lazy" />
+        </div>
+
+        <!-- 7. REVENUE BY PRODUCT (FULL WIDTH) -->
+        <div class="card card-full">
+            <div class="card-header">
+                <h3>💰 Revenue by Product</h3>
+                <span class="tag">Revenue</span>
+            </div>
+            <img src="Project4_Charts/revenue_by_product.png" alt="Revenue by Product" loading="lazy" />
+        </div>
+
+        <!-- 8. TOTAL PRICE HISTOGRAM -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📊 Total Price Distribution</h3>
+                <span class="tag">Histogram</span>
+            </div>
+            <img src="Project4_Charts/totalprice_histogram.png" alt="Total Price Histogram" loading="lazy" />
+        </div>
+
+        <!-- 9. TOTAL PRICE BOXPLOT -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📦 Total Price Boxplot</h3>
+                <span class="tag">Outliers</span>
+            </div>
+            <img src="Project4_Charts/totalprice_boxplot.png" alt="Total Price Boxplot" loading="lazy" />
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- INSIGHTS FOOTER -->
+    <!-- ============================================================ -->
+    <div class="insights-footer">
+        <h3>🔍 Key Insights from Project4</h3>
+        <div class="insight-chips">
+            <span class="chip"><strong>Strongest Correlation:</strong> <span class="highlight">UnitPrice ↔ TotalPrice</span> (0.72)</span>
+            <span class="chip"><strong>Top Revenue:</strong> <span class="highlight">Chair / Printer / Laptop</span> — $195K each</span>
+            <span class="chip"><strong>Peak Orders:</strong> <span class="highlight">May 2024</span> — 52 orders</span>
+            <span class="chip"><strong>Top Referral:</strong> <span class="highlight">Instagram</span> — 260</span>
+            <span class="chip"><strong>Most Ordered:</strong> <span class="highlight">Printer / Tablet / Chair / Laptop</span> — 175</span>
+            <span class="chip"><strong>Top Payment:</strong> <span class="highlight">Online</span> — 21.5%</span>
+            <span class="chip"><strong>Total Orders:</strong> <span class="highlight">1,247</span></span>
+            <span class="chip"><strong>Total Revenue:</strong> <span class="highlight">$2.4M</span></span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
+    <div style="text-align: center; margin-top: 28px; font-size: 13px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+        📊 DecodeLabs Internship — Project4 &nbsp;·&nbsp; Built with HTML &amp; CSS &nbsp;·&nbsp; 
+        <span id="year"></span>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
